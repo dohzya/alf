@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "browserify": "^10.2.1",
+    "lodash": "^3.9.3",
+    "moment": "^2.10.3",
+    "q": "^1.4.1",
+    "watch": "^0.16.0"
+  },
+  "scripts": {
+    "build": "browserify src/main.js -o main.js",
+    "timed": "date && browserify src/main.js -o main.js",
+    "watch": "watch 'npm run timed' src"
+  }
+}

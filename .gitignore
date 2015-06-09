@@ -1,0 +1,10 @@
+/alf.json
+/config.toml
+/env
+/go/bin/
+/go/pkg/
+/go/src/github.com/
+/go/src/gopkg.in/
+/main.js
+/node_modules/
+/output.json

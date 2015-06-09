@@ -1,0 +1,44 @@
+{
+  "days": [
+    {
+      "date": "2015-07-01",
+      "status": "unavailable"
+    },
+    {
+      "date": "2015-07-02",
+      "status": "available",
+      "slices": [
+        {"start": "10:00", "finish": "11:00"},
+        {"start": "11:30", "finish": "12:30"}
+      ]
+    },
+    {
+      "date": "2015-07-04",
+      "status": "available",
+      "slices": [
+        {"start": "14:00", "finish": "15:00"},
+        {"start": "16:00", "finish": "17:00", "status": "unavailable"}
+      ]
+    },
+    {
+      "date": "2015-07-05",
+      "status": "unavailable"
+    },
+    {
+      "date": "2015-07-06",
+      "status": "unavailable"
+    },
+    {
+      "date": "2015-07-07",
+      "status": "unavailable"
+    },
+    {
+      "date": "2015-07-08",
+      "status": "unavailable"
+    },
+    {
+      "date": "2015-07-09",
+      "status": "unavailable"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8" />
+  <script src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+  <h1 class="page-title" >Apprenons le Français</h1>
+
+  <div class="page-navigation">
+    <div class="page-navigation-item page-navigation-item-active">Agenda</div>
+    <div class="page-navigation-item page-navigation-item-inactive"><a href="/about.html">About us</a></div>
+  </div>
+
+  <script type="text/template" id="cal-template">
+    <% _.each(days, function (day) { %>
+      <% var date = moment(day.date, "YYYY-MM-DD") %>
+      <div class="cal-day cal-day-<%= day.status %>">
+        <div class="cal-day-date"><%= date.format("LL（dd）") %></div>
+        <div class="cal-day-slices">
+        <% _.each(day.slices, function (slice) { %>
+          <% var start = moment(slice.start, "HH:mm") %>
+          <% var finish = moment(slice.finish, "HH:mm") %>
+          <% if (slice.status === "unavailable") { %>
+          <div class="cal-day-slice cal-day-slice-unavailable">
+          <% } else { %>
+          <div class="cal-day-slice cal-day-slice-available" data-popup="apply-course" data-date="<%= day.date %>" data-start="<%= slice.start %>" data-finish="<%= slice.finish %>">
+          <% } %>
+            <div class="cal-day-slice-end cal-day-open-start"><%= start.format('LT') %></div>
+            <div class="cal-day-slice-end cal-day-open-finish"><%= finish.format('LT') %></div>
+          </div>
+        <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </script>
+
+  <div id="cal" class="cal"></div>
+
+  <div id="popup-background" class="popup-background"></div>
+
+  <div id="popup-apply-course" class="popup popup-apply-course"></div>
+
+  <script type="text/template" id="popup-apply-course-template">
+    <div class="popup-title">Apply to this course?</div>
+    <div class="popup-text">
+      <div class="popup-field">
+        <label>date:</label> <%= moment(data.date, "YYYY-MM-DD").format("LL（dd）") %>
+        <input type="hidden" value="<%= data.date %>" name="date" />
+      </div>
+      <div class="popup-field">
+        <label>start:</label> <%= moment(data.start, "HH:mm").format('LT') %>
+        <input type="hidden" value="<%= data.start %>" name="start" />
+      </div>
+      <div class="popup-field">
+        <label>finish:</label> <%= moment(data.finish, "HH:mm").format('LT') %>
+        <input type="hidden" value="<%= data.finish %>" name="finish" />
+      </div>
+      <div class="popup-field">
+        <label>名前:</label>
+        <input type="text" name="name" value="<%= storage.name %>" />
+      </div>
+      <div class="popup-field">
+        <label>contact:</label>
+        <input type="text" name="contact" value="<%= storage.contact %>" />
+        <select name="contactType">
+          <option value="skype" <%= storage.contactType === "skype" ? "selected" : "" %>>Skype</option>
+          <option value="email" <%= storage.contactType === "email" ? "selected" : "" %>>メール</option>
+        </select>
+      </div>
+    </div>
+    <div class="popup-notice">
+      <span class="popup-notice-txt" data-if-status-applying>Applying…</span>
+      <span class="popup-notice-txt" data-if-status-success>Applied</span>
+      <span class="popup-notice-txt" data-if-status-error>Error occured</span>
+      <span class="popup-notice-txt" data-if-status-invalid>Some fields are invalid</span>
+    </div>
+    <div class="popup-buttons" data-if-status-new data-if-status-applying data-if-status-error data-if-status-invalid>
+      <div class="popup-button popup-button-submit" data-popup-trigger="action">APPLY</div>
+      <div class="popup-button popup-button-cancel" data-popup-trigger="hide">cancel</div>
+    </div>
+    <div class="popup-buttons" data-if-status-success>
+      <div class="popup-button popup-button-submit" data-popup-trigger="hide">close</div>
+    </div>
+  </script>
+
+  <script>
+    ALF.start({
+      dataFile: "/alf.json",
+      template: document.getElementById("cal-template"),
+      cal: document.getElementById("cal"),
+      popupBg: document.getElementById("popup-background"),
+      popups: {
+        "apply-course": {
+          el: document.getElementById("popup-apply-course"),
+          template: document.getElementById("popup-apply-course-template"),
+          action: ALF.applyCourse,
+          storage: ["name", "contact", "contactType"]
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+log_level = "info"
+
+http_port = 8080
+
+output_file = "output.json"
+
+mail_enabled = true
+mail_username = ""
+mail_password = ""
+mail_server = ""
+mail_port = 25
+mail_sender = ""
+mail_dest = ""
