@@ -178,7 +178,7 @@ window.ALF = (function (localStorage) {
     } else {
       debug.log("applyCourse :: fields = ", fields)
       ajax({
-        url: "http://127.0.0.1:8080/infos",
+        url: popup.actionURL,
         method: "POST",
         data: fields
       }).then(
