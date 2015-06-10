@@ -92,9 +92,14 @@ body {
   border-radius: 10px;
 }
 
-.cal-day-slice-available:hover {
+.cal-day-slice-available {
   cursor: pointer;
 
+  border: 2px solid #fff;
+  background-color: #dbeeff;
+}
+
+.cal-day-slice-available:hover {
   border: 2px solid #aacdff;
   background-color: #b7d4ff;
 }
